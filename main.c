@@ -29,7 +29,7 @@ int main()
     //     return (0);
     // }
     // file = argv[1];
-    fd1 = open ("whyudis", O_RDONLY);
+    // fd1 = open ("whyudis", O_RDONLY);
     // fd = open ("blahblah", O_RDONLY);
     // ft_putnbr(fd);
     // result = get_next_line(fd, &line);
