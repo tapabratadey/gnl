@@ -16,18 +16,42 @@
 int main(int argc, char **argv)
 {
 
-    char *line;
+    char *line = NULL;
+    char *file;
     int fd;
+    int result;
 
-    fd = open (argv[1], O_RDONLY);
-    get_next_line(fd, &line);
-   
-
-    if (*line)
+    result = 0;
+    if (argc != 2)
     {
-        ft_putendl(line);
-        ft_strdel(&line);
+        printf("gg");
+        return (0);
     }
+    file = argv[1];
+    fd = open (file, O_RDONLY);
+    // ft_putnbr(fd);
+    result = get_next_line(fd, &line);
+    // ft_putstr(line);
+    // ft_putnbr(result);
+    // ft_putchar('\n');
+    result = get_next_line(fd, &line);
+    // ft_putstr(line);
+    // ft_putnbr(result);
+    // ft_putchar('\n');
+    result = get_next_line(fd, &line);
+    // ft_putstr(line);
+    // ft_putnbr(result);
+    // ft_putchar('\n');
+    // result = get_next_line(fd, &line);
+    // ft_putstr(line);
+    // ft_putnbr(result);
+    // // ft_putchar('\n');
+    // get_next_line(fd, &line);z
+    // if (*line)
+    // {
+    //     ft_putendl(line);
+    //     ft_strdel(&line);
+    // }
     // get_next_line(fd, &line);
     // if (*line)
     // {
