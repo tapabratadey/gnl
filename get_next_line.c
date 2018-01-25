@@ -21,21 +21,18 @@ char	*cut_string(char **arr, int fd)
 	char	*array;
 	char *new_fd_arr;
 
-
-	
 	i = 0;
-	
-
 
 	//if arr[fd] has no newline but is also not empty
 	if (ft_strchr(arr[fd], '\n') == 0 && ft_strlen(arr[fd]) != 0)
 	{
 		new_line = ft_strjoin(arr[fd], "\n");	
 		ft_strdel(&arr[fd]);
-`		arr[fd] = new_line;
+		arr[fd] = new_line;
+		// ft_putstr("whyudis");
 	}
 	// return (new_line);
-
+	
 		
 	array = arr[fd];
 
@@ -46,6 +43,9 @@ char	*cut_string(char **arr, int fd)
 	//find the length of the first line
 	while (array[i] && array[i] != '\n')
 		i++;
+
+	// ft_putstr("this is how i look:\n");
+	// ft_putstr(arr[fd]);
 	
 	// ft_putstr("my size is: \n");
 	// ft_putnbr(i);
@@ -58,24 +58,26 @@ char	*cut_string(char **arr, int fd)
 	ft_strncpy(new_line, array, i);
 
 	
-	ft_putstr("\ni am before arr[fd] now: \n");
-	ft_putstr(new_line);
+	// ft_putstr("\ni am before arr[fd] now: \n");
+	// ft_putstr(new_line);
 
 	// ft_putstr("\n");
 	
 
-	// //null terminate the string
+	//null terminate the string
 	// new_line[i] = '\0';
 
 	//creating space after the line we want to return in our next call
-	new_fd_arr = ft_strdup(ft_strchr(arr[fd], '\n') + 1);
-	
-
+	if (ft_strchr(arr[fd], '\n') != 0)
+		new_fd_arr = ft_strdup(ft_strchr(arr[fd], '\n') + 1);
+	else
+		return (ft_strdup(""));
+	// ft_putendl(new_line);
 	//delete line from static array
-	// if (arr[fd] != 0)
-		// ft_strdel(&arr[fd]);
+	if (arr[fd] != 0)
+		ft_strdel(&arr[fd]);
 	
-	ft_putendl("\ndeleted");
+	// ft_putendl("\ndeleted");
 
 	//reassigning static array to the new static arrays
 	arr[fd] = new_fd_arr;
@@ -116,7 +118,7 @@ int    fill_arr(char **arr, int fd)
     }
 	
 	//if my read_ret is 0 and my static array is empty then exit
-	if (read_ret == 0 && arr[fd] == 0)
+	if (read_ret == 0 && *(arr[fd]) == 0)
 			return (0);
 	return (1);
 }
@@ -128,24 +130,31 @@ int get_next_line(int const fd, char **line)
 {
 	char buff[BUFF_SIZE + 1]; //buff array w size of BUFF_SIZE + 1 for '\0'
 	static char *arr[FD_LIMIT]; //static arr w size of FD_LIMIT
-	
+	int ret_fill_arr;
+
 	//error handling
     if (line == NULL || fd < 0 || read(fd, buff, 0) < 0 || fd > FD_LIMIT)
         return (-1);
 	
 	//if my static array is empty then it'll be filled
-	if(fill_arr(arr, fd) == 0)
+	if ((ret_fill_arr = fill_arr(arr, fd)) == 0)
 	{
 		*line = "";
 		return (0);
 	}
-		
 
 	//calling cut_string. pointing line to it.
 	*line = cut_string(arr, fd);
-
+	// ft_putstr(*line);
 	//if my line exists then return 1 else 0.
-	if (**line)
-		return (1);
+	// ft_putstr("heybabe");
+	// ft_putstr(*line);
+	// ft_putstr("hello");
+	// ft_putnbr(ret_fill_arr);
+	if (ret_fill_arr)
+	{
+		// ft_putendl("fucku");
+		return (1);		
+	}		
 	return (0);
 }
