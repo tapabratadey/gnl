@@ -6,7 +6,7 @@
 /*   By: tadey <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 15:44:22 by tadey             #+#    #+#             */
-/*   Updated: 2018/01/27 20:56:52 by tadey            ###   ########.fr       */
+/*   Updated: 2018/02/15 18:02:06 by tadey            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int    fill_arr(char **arr, int fd)
     }
 	
 	//if my read_ret is 0 and my static array is empty then exit
-	if (read_ret == 0 && (arr[fd]) == 0)
+	if (read_ret == 0 && *(arr[fd]) == 0)
 			return (0);
 	return (1);
 }
